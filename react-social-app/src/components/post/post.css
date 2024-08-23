@@ -1,0 +1,116 @@
+.post {
+  width: 97%;
+ 
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 4px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    margin: auto;
+  
+  }
+  
+  .postWrapper {
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .postTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .postTopLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .postProfileImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .postUsername {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 10px;
+  }
+  
+  .postDate{
+      font-size: 12px;
+  }
+  
+  .postCenter{
+      margin: 20px 0;
+  }
+  
+  .postImg{
+      margin-top: 20px;
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+  }
+  
+  .postBottom{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+  
+  .postBottomLeft{
+      display: flex;
+      align-items: center;   
+  }
+  
+  .likeIcon {
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+  margin-left: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+}
+
+.likeIcon:active {
+    transform: scale(1.4);
+    filter: brightness(1.3);
+}
+
+.likeIcon.liked {
+    transform: scale(1.4);
+    filter: brightness(1.3);
+}
+
+  
+  .postLikeCounter{
+      font-size: 15px;
+      margin-left: 5px;
+  }
+  
+  .postCommentText{
+      cursor: pointer;
+      border-bottom: 1px dashed gray;
+      font-size: 15px;
+  }
+
+  .likeIcon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+.likeIcon:active {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+.likeIcon.liked {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}

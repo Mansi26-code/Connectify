@@ -1,0 +1,148 @@
+.rightbar {
+  flex: 3.5;
+  position: sticky;
+  top: 50px;
+  background-color: black;
+  color: white;
+}
+
+.rightbarWrapper {
+  padding: 20px;
+}
+
+.birthdayImg {
+  height: 42px;
+  width: 42px;
+  margin-right: 10px;
+}
+
+.birthdayText {
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.birthdayContainer {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.rightbarAd {
+  border: 2px solid rgb(97, 97, 97);
+  width: 100%;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.rightbarFriendList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rightBarFriend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rightbarProfileImgContainer {
+  position: relative;
+}
+
+.rightbarProfileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rightbarOnline {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: limegreen;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -4px;
+  border: 2px solid white;
+}
+
+.rightbarUsername {
+  margin-left: 13px;
+  font-weight: 500;
+}
+
+.rightbarTitle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.rightbarInfoItem {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.rightbarInfoValue {
+  font-weight: 300;
+}
+
+.rightbarFollowings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.rightbarFollowing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-basis: 48%;
+}
+
+.rightbarFollowingImg {
+  height: 94px;
+  width: 94px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid white;
+  margin-bottom: 10px;
+}
+
+.rightbarFollowingImg:hover {
+  box-shadow: 2px 2px 5px white;
+  height: 96px;
+  width: 96px;
+}
+
+.rightbarFollowingName {
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+
+.rightbarFollowButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 70px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  color: black;
+}
+
+.rightbarFollowButton:focus {
+  outline: none;
+}
