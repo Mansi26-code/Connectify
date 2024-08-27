@@ -1,40 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Ensure axios is imported
+import { format, render, cancel, register } from 'timeago.js';
 import "./post.css";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Users } from '../../../dummyData';
+import { Link } from 'react-router-dom'; // Note the single quotes around the module name
+
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like);
+  // Initialize state for likes and whether the post is liked
+  const [like, setLike] = useState(post.likes.length); // Assuming post.likes is an array
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
   const PF = import.meta.env.VITE_PUBLIC_FOLDER;
 
-  if (post) {
-    console.log(PF + post.photo);
-  }
+  // Fetch user details when post.userId changes
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/api/users/${post.userId}`);
+        console.log('API response:', res.data); // Check the structure of the response
+        setUser(res.data);
+      } catch (err) {
+        console.error('Error fetching user:', err);
+      }
+    };
+    
 
-  const likeHandler = (e) => {
-    setLike(isLiked ? like - 1 : like + 1);
+    fetchUser();
+  }, [post.userId]);
+
+  // Handler for like button click
+  const likeHandler = () => {
+    setLike(prevLike => isLiked ? prevLike - 1 : prevLike + 1);
     setIsLiked(!isLiked);
-
-    const icon = e.target;
-    icon.classList.toggle("liked");
   };
 
-  console.log(post);
+
+
+
+  // Ensure PF and post.img handle missing values gracefully
+  const profilePicture = user.profilePicture ? `${PF}${user.profilePicture}` : `${PF}person/avatar.webp`;
+  const postImage = post.img ? `${PF}${post.img}` : `${PF}defaultPostImage.png`; // Provide a default image if post.img is missing
+
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
+            <Link to ={`profile/${user.username}`}>
             <img
               className="postProfileImg"
-              src={PF + Users.filter((u) => u.id === post.userId)[0].profilePicture}
+              src={user.profilePicture ||PF+"person/avatar.webp"}
               alt="Profile"
             />
+            </Link>
             <span className="postUsername">
-              {Users.filter((u) => u.id === post.userId)[0].username}
+              {user.username || "Unknown User"}
             </span>
-            <div className="postDate">{post.date}</div>
+            <div className="postDate">{format(post.createdAt)}</div> {/* Display formatted date */}
           </div>
 
           <div className="postTopRight">
@@ -44,23 +67,23 @@ const Post = ({ post }) => {
 
         <div className="postCenter">
           <div className="postText">
-            <span>{post?.desc}</span>
+            <span>{post.desc}</span>
           </div>
 
-          <img src={PF + post.photo} alt="" className="postImg" />
+          <img src={postImage} alt="Post" className="postImg" />
         </div>
 
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src={PF + "like.png"}
+              src={`${PF}like.png`}
               alt="like"
               onClick={likeHandler}
             />
             <img
               className="likeIcon"
-              src={PF + "heart.jpeg"}
+              src={`${PF}heart.jpeg`}
               alt="heart"
               onClick={likeHandler}
             />
@@ -68,7 +91,7 @@ const Post = ({ post }) => {
           </div>
           <div className="postBottomRight">
             <div className="postCommentText">
-              {post.comment} comments
+              {post.commentCount || 0} comments {/* Assuming commentCount is a number */}
             </div>
           </div>
         </div>
@@ -78,6 +101,7 @@ const Post = ({ post }) => {
 };
 
 export default Post;
+
 
 
 

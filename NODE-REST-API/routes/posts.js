@@ -5,16 +5,24 @@ const User= require("../models/User")
 
 //create a post
 
-router.post("/" ,async(req,res)=>{
-    const newPost= new Post(req.body);
 
-    try{
-        const savedPost=await newPost.save();
-        res.status(200).json(savedPost);
-    }
-    catch(err)
-    {
-        res.status(500).json(err);
+router.get("/profile/:username", async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
+        
+        if (!user) {
+            return res.status(404).json("User not found");
+        }
+        
+
+        // Ensure userId field is of the correct type if necessary
+        const posts = await Post.find({ userId: user._id });
+        
+        console.log(posts); // Ensure this logs correctly
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error("Error fetching posts:", err); // More descriptive error message
+        res.status(500).json({ message: "Server error", error: err.message });
     }
 });
 
@@ -102,9 +110,9 @@ catch(err){
 // get Timeline posts
 
 
-router.get("/timeline/all", async (req, res) => {
+router.get("/timeline/:userId", async (req, res) => {
     try {
-        let currentUser = await User.findById(req.body.userId);
+        let currentUser = await User.findById(req.params.userId);
         if (!currentUser) {
             return res.status(404).json("User not found");
         }
@@ -115,13 +123,31 @@ router.get("/timeline/all", async (req, res) => {
             })
         );
         console.log(userPosts);
-        res.json(userPosts.concat(...friendPosts));
+        res.status(200).json(userPosts.concat(...friendPosts));
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
+
+//get user's all posts
+// get user's all posts
+router.get("/profile/:username", async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
+        if (!user) {
+            return res.status(404).json("User not found");
+        }
+
+        const posts = await Post.find({ userId: user._id });
+        console.log(posts);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 
 

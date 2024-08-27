@@ -3,23 +3,21 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
     userId: {
         type: String,
-        required: true, // Corrected spelling
-       
+        required: true,
     },
-   
+ 
     desc: {
         type: String,
-        maxlength: 500 // Updated for better readability
+        maxlength: 500,
     },
-    img:{
-       type:String,
+    img: {
+        type: String,
     },
-    likes:{
-        type:Array,
-        default:[]
+    likes: {
+        type: [String], // Better to use an array of strings for user IDs or other data
+        default: [],
     },
-   
-}, 
-{ timestamps: true });
+}, { timestamps: true });
 
 module.exports = mongoose.model("Post", PostSchema);
+

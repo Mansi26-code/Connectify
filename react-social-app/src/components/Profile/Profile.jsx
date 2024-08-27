@@ -8,6 +8,7 @@ const PF = import.meta.env.VITE_PUBLIC_FOLDER;
 
 export default function Profile() {
   console.log(`{PF} post/post2.jpg`);
+   
   return (
     <>
     <Topbar/>
@@ -30,7 +31,7 @@ export default function Profile() {
         </div>
         <div className="profileRightBottom">
 
-            <Feed/>
+            <Feed username="Rudra"/>
             <Rightbar Profile/>
              {/* it will indicate if rightbar is in profile page or home page */}
         </div>
@@ -40,8 +41,7 @@ export default function Profile() {
 
       
         
-        <Feed/>
-        <Rightbar/>
+        
         
      </>
   )

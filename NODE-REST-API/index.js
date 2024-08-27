@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const userRoute=require("./routes/users");
-const authRoute=require("./routes/auth");
-const postRoute=require("./routes/posts");
+const cors = require("cors"); // Import the cors package
+const userRoute = require("./routes/users");
+const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 dotenv.config();
 
@@ -23,23 +24,28 @@ async function connectToDB() {
 };
 
 connectToDB();
- // Don't forget to call the function to connect to the DB
- app.use(express.json());
- app.use(helmet());
- app.use(morgan("common"));
- app.use("/api/users",userRoute);
- app.use("/api/auth", authRoute);
- app.use("/api/posts", postRoute);
 
+// Use cors middleware
+app.use(cors({
+  origin: 'http://localhost:5173', // Replace with your frontend's URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow methods
+  credentials: true, // Allow credentials (if needed)
+}));
 
- app.get("/",(req,res)=>{
-     res.send("Welcome to home page");
- });
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));
+app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/posts", postRoute);
 
- app.get("/users",(req,res)=>{
-    res.send("Welcome to user's page");
+app.get("/", (req, res) => {
+  res.send("Welcome to home page");
 });
 
+app.get("/users", (req, res) => {
+  res.send("Welcome to user's page");
+});
 
 app.listen(8800, () => {
   console.log("Backend Server is listening on port 8800");
