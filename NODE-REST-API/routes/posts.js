@@ -6,7 +6,7 @@ const User= require("../models/User")
 //create a post
 
 
-router.get("/profile/:username", async (req, res) => {
+router.get("/profile/username", async (req, res) => {
     try {
         const user = await User.findOne({ username: req.params.username });
         
@@ -125,7 +125,7 @@ router.get("/timeline/:userId", async (req, res) => {
         console.log(userPosts);
         res.status(200).json(userPosts.concat(...friendPosts));
     } catch (err) {
-        console.log(err);
+        console.log(err);  
         res.status(500).json(err);
     }
 });
